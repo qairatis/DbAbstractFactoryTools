@@ -9,11 +9,10 @@ public class Application {
 	private final DbProviderFactory providerFactory;
 
 	public Application(DbProviderFactory providerFactory) {
-//		super();
 		this.providerFactory = providerFactory;
 	}
 	
-	public void start() {
+	public void start(String query) {
 		DbConnection connection = providerFactory.getConnection();
 		connection.connect();
 		
@@ -21,11 +20,12 @@ public class Application {
 		transaction.start();
 		
 		DbCommand command = providerFactory.createCommand(transaction);
-		command.setCommandText("select *");
+		command.setCommandText(query);
 		command.prepare();
 		command.execute();
 		
 		transaction.commit();
+		connection.disconnect();
 	}
 	
 
