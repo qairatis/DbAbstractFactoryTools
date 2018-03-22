@@ -5,6 +5,7 @@ import kz.qairatis.itstep.designpatterns.abstractfactory.db.DbConnection;
 import kz.qairatis.itstep.designpatterns.abstractfactory.db.DbProviderFactory;
 import kz.qairatis.itstep.designpatterns.abstractfactory.db.DbTransaction;
 
+import java.sql.*;
 public class Application {
 	private final DbProviderFactory providerFactory;
 
@@ -12,20 +13,14 @@ public class Application {
 		this.providerFactory = providerFactory;
 	}
 	
-	public void start(String query) {
-		DbConnection connection = providerFactory.getConnection();
-		connection.connect();
+	public void performSQL(String query) {
+		DbConnection connection = providerFactory.createConnection();
+		DbTransaction transaction = providerFactory.createTransaction();
+		DbCommand command = providerFactory.createCommand();
 		
-		DbTransaction transaction = providerFactory.createTransaction(connection);
-		transaction.start();
-		
-		DbCommand command = providerFactory.createCommand(transaction);
-		command.setCommandText(query);
-		command.prepare();
-		command.execute();
-		
-		transaction.commit();
-		connection.disconnect();
+		transaction.useConnection(connection);
+		command.useTransaction(transaction);
+		command.setQuery(query).execute();
 	}
 	
 

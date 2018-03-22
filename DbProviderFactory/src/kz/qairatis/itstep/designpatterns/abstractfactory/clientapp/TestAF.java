@@ -6,13 +6,13 @@ import kz.qairatis.itstep.designpatterns.abstractfactory.oracleprovider.OraclePr
 public class TestAF {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub @done
 	    DatabaseVendor databaseType = DatabaseVendor.ORACLE;
 	    DbProviderFactory providerFactory = 
 	    		getProviderFactory(databaseType);
 
 	    Application application = new Application(providerFactory);
-	    application.start("select dummy from dual");
+	    application.performSQL("select * from users");
 	}
 
 	  private static DbProviderFactory getProviderFactory(
