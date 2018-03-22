@@ -9,13 +9,13 @@ public class OracleConnection implements DbConnection {
 	}
 
 	@Override
-	public void connect() {
+	public void open() {
 		// TODO Auto-generated method stub @done
 		System.out.println("Connecting to Oracle at " + connectionString);
 	}
 
 	@Override
-	public void disconnect() {
+	public void close() {
 		// TODO Auto-generated method stub
 		System.out.println("Disconnected from " + connectionString);
 	}
