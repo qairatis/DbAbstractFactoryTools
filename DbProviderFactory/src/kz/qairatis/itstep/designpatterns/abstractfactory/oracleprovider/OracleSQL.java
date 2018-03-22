@@ -6,36 +6,28 @@ import kz.qairatis.itstep.designpatterns.abstractfactory.db.DbTransaction;
 public class OracleSQL implements DbCommand {
 	private DbTransaction transaction;
 	String sqlQuery;
-	
-	public OracleSQL(DbTransaction transaction) {
-		this.transaction = transaction;
-	}
 
 	@Override
-	public void setCommandText(String commandText) {
+	public DbCommand setQuery(String commandText) {
 		// TODO Auto-generated method stub
 		this.sqlQuery = commandText;
 		System.out.println("Set: " + this.sqlQuery);
-	}
-
-	@Override
-	public void prepare() {
-		// TODO Auto-generated method stub
-		System.out.println("Prepare: " + this.sqlQuery);
+		return this;
 	}
 
 	@Override
 	public int execute() {
 		// TODO Auto-generated method stub
 		System.out.println("Execute: " + this.sqlQuery);
+		this.transaction.end();
 		return 0;
 	}
 
 	@Override
-	public int cancel() {
+	public void useTransaction(DbTransaction transaction) {
 		// TODO Auto-generated method stub
-		System.out.println("Trying to cancel execution via Oracle engine");
-		return 0;
+		this.transaction = transaction;
+		this.transaction.start();
 	}
 
 }

@@ -12,21 +12,21 @@ public class OracleProvider implements DbProviderFactory {
 	}
 
 	@Override
-	public DbConnection getConnection() {
+	public DbConnection createConnection() {
 		// TODO Auto-generated method stub
 		return new OracleConnection(connStr);
 	}
 
 	@Override
-	public DbCommand createCommand(DbTransaction dbTransaction) {
+	public DbCommand createCommand() {
 		// TODO Auto-generated method stub
-		return new OracleSQL(dbTransaction);
+		return new OracleSQL();
 	}
 
 	@Override
-	public DbTransaction createTransaction(DbConnection dbConnection) {
+	public DbTransaction createTransaction() {
 		// TODO Auto-generated method stub
-		return new OracleTransaction(dbConnection);
+		return new OracleTransaction();
 	}
 
 }

@@ -12,7 +12,7 @@ public class TestAF {
 	    		getProviderFactory(databaseType);
 
 	    Application application = new Application(providerFactory);
-	    application.start("select dummy from dual");
+	    application.performSQL("select dummy from dual");
 	}
 
 	  private static DbProviderFactory getProviderFactory(
