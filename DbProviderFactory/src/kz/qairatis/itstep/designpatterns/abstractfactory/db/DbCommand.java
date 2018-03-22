@@ -1,7 +1,14 @@
 package kz.qairatis.itstep.designpatterns.abstractfactory.db;
 
-public interface DbCommand {
-	public DbCommand setQuery(String commandText);
-	public int execute(); 
-	public void useTransaction(DbTransaction transaction);
+public abstract class DbCommand {
+	DbTransaction transaction;
+	public abstract DbCommand setQuery(String commandText);
+	public abstract int execute(); 
+	public final void useTransaction(DbTransaction transaction) {
+		this.transaction = transaction;
+		this.transaction.start();
+	}
+	public final DbTransaction getTransaction() {
+		return transaction;
+	};
 }
