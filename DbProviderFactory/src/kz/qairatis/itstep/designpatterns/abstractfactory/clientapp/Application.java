@@ -4,10 +4,8 @@ import kz.qairatis.itstep.designpatterns.abstractfactory.db.DbCommand;
 import kz.qairatis.itstep.designpatterns.abstractfactory.db.DbConnection;
 import kz.qairatis.itstep.designpatterns.abstractfactory.db.DbProviderFactory;
 import kz.qairatis.itstep.designpatterns.abstractfactory.db.DbTransaction;
-
-import java.sql.*;
 public class Application {
-	private final DbProviderFactory providerFactory;
+	private DbProviderFactory providerFactory;
 
 	public Application(DbProviderFactory providerFactory) {
 		this.providerFactory = providerFactory;
